@@ -1,0 +1,5 @@
+org\brutforcer\gateway\config\SwaggerConfig.class
+org\brutforcer\gateway\controller\StatusResource.class
+org\brutforcer\gateway\GatewayLauncher.class
+org\brutforcer\gateway\config\ApplicationConfig.class
+org\brutforcer\gateway\controller\impl\StatusResourceRest.class
