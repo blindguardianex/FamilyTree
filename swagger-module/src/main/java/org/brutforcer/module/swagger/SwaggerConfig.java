@@ -1,4 +1,4 @@
-package org.brutforcer.gateway.config;
+package org.brutforcer.module.swagger;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -43,6 +43,6 @@ public class SwaggerConfig {
         return List.of(
                 new Server().url("http://localhost:8080/family-tree").description("Внешний API (шлюз) приложения"),
                 new Server().url("http://localhost:8081/auth").description("Сервер авторизации"),
-                new Server().url("http://localhost:8080/user-service").description("Сервис управления профилями пользователей"));
+                new Server().url("http://localhost:8082/user-service").description("Сервис управления профилями пользователей"));
     }
 }
