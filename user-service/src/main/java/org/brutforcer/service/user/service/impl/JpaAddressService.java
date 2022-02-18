@@ -1,6 +1,6 @@
 package org.brutforcer.service.user.service.impl;
 
-import org.apache.tomcat.jni.Address;
+import org.brutforcer.service.user.entity.Address;
 import org.brutforcer.service.user.repository.AddressRepository;
 import org.brutforcer.service.user.service.AddressService;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,7 @@
 package org.brutforcer.service.user.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,7 +13,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
+
 @Data
+@Accessors(chain = true)
 @Embeddable
 public class UserProfile {
 
@@ -45,11 +48,4 @@ public class UserProfile {
     @OneToOne(optional = false, targetEntity = Address.class)
     @JoinColumn(name = "birth_place", insertable = true)
     private Address birthPlace;
-
-    @Column(name = "death_date", nullable = false)
-    private LocalDate deathDate;
-
-    @OneToOne(targetEntity = Address.class)
-    @JoinColumn(name = "death_place", insertable = true)
-    private Address deathPlace;
 }

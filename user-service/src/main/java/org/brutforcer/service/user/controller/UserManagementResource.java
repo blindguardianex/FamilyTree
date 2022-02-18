@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Tag(
         name = "user-management",
         description = "Управление пользователями")
@@ -18,7 +20,7 @@ public interface UserManagementResource {
 
     @Operation(summary = "Зарегистрировать пользователя")
     @PostMapping("/user")
-    ResponseEntity<User> signUp(UserRegistryDto registryDto);
+    ResponseEntity<User> signUp(@Valid UserRegistryDto registryDto);
 
     @Operation(summary = "Получить профиль пользователя по id")
     @GetMapping("/user/{userId}}")

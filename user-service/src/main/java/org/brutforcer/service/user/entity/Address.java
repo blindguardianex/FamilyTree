@@ -1,9 +1,14 @@
 package org.brutforcer.service.user.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+@Data
+@Accessors(chain = true)
 @Entity
 public class Address extends BaseEntity{
 

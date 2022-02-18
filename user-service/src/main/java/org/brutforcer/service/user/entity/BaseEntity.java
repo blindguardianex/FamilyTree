@@ -40,6 +40,7 @@ public abstract class BaseEntity {
         if (this.created == null) {
             this.created = LocalDateTime.now();
         }
+        this.status = Status.ACTIVE;
     }
 
     @PreUpdate

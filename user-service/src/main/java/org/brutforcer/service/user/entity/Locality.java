@@ -1,5 +1,7 @@
 package org.brutforcer.service.user.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.brutforcer.service.user.enums.Status;
 
 import javax.persistence.*;
@@ -7,6 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
+@Accessors(chain = true)
 @Entity
 public class Locality extends BaseEntity{
 

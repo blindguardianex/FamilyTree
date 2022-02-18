@@ -1,6 +1,7 @@
 package org.brutforcer.service.user.service;
 
-import org.apache.tomcat.jni.Address;
+
+import org.brutforcer.service.user.entity.Address;
 
 import java.util.Optional;
 
