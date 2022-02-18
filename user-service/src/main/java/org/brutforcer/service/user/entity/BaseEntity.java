@@ -7,6 +7,8 @@ import lombok.Data;
 import org.brutforcer.service.user.enums.Status;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,6 +19,7 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created")
@@ -27,6 +30,7 @@ public abstract class BaseEntity {
     @Column(name = "updated")
     private LocalDateTime updated;
 
+    @NotBlank
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
