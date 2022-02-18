@@ -10,5 +10,6 @@ public class UserServiceLauncher {
 
     public static void main(String[] args) {
         SpringApplication.run(UserServiceLauncher.class);
+
     }
 }
