@@ -1,4 +1,5 @@
-F:\TrainProject\FamilyTree\gateway\src\main\java\org\brutforcer\gateway\config\ApplicationConfig.java
-F:\TrainProject\FamilyTree\gateway\src\main\java\org\brutforcer\gateway\controller\StatusResource.java
-F:\TrainProject\FamilyTree\gateway\src\main\java\org\brutforcer\gateway\controller\impl\StatusResourceRest.java
-F:\TrainProject\FamilyTree\gateway\src\main\java\org\brutforcer\gateway\GatewayLauncher.java
+F:\TrainProject\FamilyTree\gateway\src\main\java\org\brutforcer\service\gateway\config\ApplicationConfig.java
+F:\TrainProject\FamilyTree\gateway\src\main\java\org\brutforcer\service\gateway\controller\impl\StatusResourceRest.java
+F:\TrainProject\FamilyTree\gateway\src\main\java\org\brutforcer\service\gateway\controller\StatusResource.java
+F:\TrainProject\FamilyTree\gateway\src\main\java\org\brutforcer\service\gateway\config\RoutingConfig.java
+F:\TrainProject\FamilyTree\gateway\src\main\java\org\brutforcer\service\gateway\GatewayLauncher.java

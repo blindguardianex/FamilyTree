@@ -14,6 +14,7 @@
         <module>authorization-service</module>
         <module>swagger-module</module>
         <module>config-service</module>
+        <module>discovery-service</module>
     </modules>
 
     <properties>
@@ -21,6 +22,9 @@
         <maven.compiler.target>17</maven.compiler.target>
         <!--lib versions-->
         <spring-boot.version>2.6.2</spring-boot.version>
+        <spring-cloud-config.version>3.1.0</spring-cloud-config.version>
+        <spring-cloud-discovery.version>3.1.0</spring-cloud-discovery.version>
+        <spring-cloud-gateway.version>3.1.0</spring-cloud-gateway.version>
         <jackson.datatype.version>2.13.0</jackson.datatype.version>
         <flyway.version>8.3.0</flyway.version>
         <lombok.version>1.18.22</lombok.version>

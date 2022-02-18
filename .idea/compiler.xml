@@ -11,6 +11,7 @@
         <module name="user-service" />
         <module name="config-service" />
         <module name="gateway" />
+        <module name="discovery-service" />
         <module name="swagger-configuration" />
       </profile>
     </annotationProcessing>
@@ -22,6 +23,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="authorization-service" options="-parameters" />
       <module name="config-service" options="-parameters" />
+      <module name="discovery-service" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="swagger-configuration" options="-parameters" />
       <module name="swagger-module" options="-parameters" />
