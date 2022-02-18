@@ -1,4 +1,4 @@
-package org.brutforcer.user.config;
+package org.brutforcer.service.gateway.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;

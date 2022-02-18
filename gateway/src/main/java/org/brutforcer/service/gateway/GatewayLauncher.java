@@ -1,12 +1,13 @@
-package org.brutforcer.auth;
+package org.brutforcer.service.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AuthorizationServiceLauncher {
+public class GatewayLauncher {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthorizationServiceLauncher.class);
+        SpringApplication.run(GatewayLauncher.class);
     }
 }
+

@@ -1,4 +1,4 @@
-package org.brutforcer.user.entity;
+package org.brutforcer.service.user.entity;
 
 import lombok.Data;
 

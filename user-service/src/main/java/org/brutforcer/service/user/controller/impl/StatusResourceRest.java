@@ -1,6 +1,6 @@
-package org.brutforcer.user.controller.impl;
+package org.brutforcer.service.user.controller.impl;
 
-import org.brutforcer.user.controller.StatusResource;
+import org.brutforcer.service.user.controller.StatusResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
