@@ -46,18 +46,8 @@ create table if not exists user_roles(
     user_id     bigserial   not null,
     role_id     bigserial   not null
 );
-ALTER TABLE user_roles
-    ADD CONSTRAINT fk_user_roles_user
-        FOREIGN KEY (user_id)
-            REFERENCES users("id")
-            ON DELETE CASCADE
-            ON UPDATE CASCADE;
-ALTER TABLE user_roles
-    ADD CONSTRAINT fk_user_roles_role
-        FOREIGN KEY (role_id)
-            REFERENCES roles("id")
-            ON DELETE CASCADE
-            ON UPDATE CASCADE;
+alter table user_roles add constraint fk_user_roles_user foreign key (user_id) references users("id") on delete cascade on update cascade;
+alter table user_roles add constraint fk_user_roles_role foreign key (role_id) references roles("id") on delete cascade on update cascade;
 comment on table user_roles is 'Таблица связи пользователей и ролей';
 comment on column user_roles.user_id is 'ИД пользователя';
 comment on column user_roles.role_id is 'ИД роли';
