@@ -20,6 +20,7 @@ public class UserManagementResourceRest implements UserManagementResource {
 
     @Override
     public ResponseEntity<User> signUp(UserRegistryDto registryDto) {
+        System.out.println(registryDto);
         return ResponseEntity.ok(registryDto.toUser());
     }
 

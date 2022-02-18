@@ -1,0 +1,3 @@
+org\brutforcer\service\gateway\config\ApplicationConfig.class
+org\brutforcer\service\gateway\config\RoutingConfig.class
+org\brutforcer\service\gateway\GatewayLauncher.class
