@@ -10,24 +10,24 @@ import java.util.Optional;
 @Service
 public class JpaAddressService implements AddressService {
 
-    private final AddressRepository addressRepository;
+    private final AddressRepository repository;
 
-    public JpaAddressService(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
+    public JpaAddressService(AddressRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public Address add(Address address) {
-        return addressRepository.saveAndFlush(address);
+        return repository.saveAndFlush(address);
     }
 
     @Override
     public Address update(Address address) {
-        return addressRepository.saveAndFlush(address);
+        return repository.saveAndFlush(address);
     }
 
     @Override
-    public Optional<Address> getById(Long id) {
-        return addressRepository.findById(id);
+    public Optional<Address> getById(long id) {
+        return repository.findById(id);
     }
 }

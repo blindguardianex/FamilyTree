@@ -6,11 +6,14 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Accessors(chain = true)
 @Entity
+@Table(name = "regions")
 public class Region extends BaseEntity{
 
     @NotBlank
@@ -21,15 +24,20 @@ public class Region extends BaseEntity{
     @Column(name = "code", nullable = false)
     private String code;
 
-    @OneToOne(optional = false, targetEntity = Country.class)
-    @JoinColumn(name = "country_id", insertable = false, updatable = false, nullable = false)
+    @NotNull
+    @ManyToOne(optional = false, targetEntity = Country.class)
+    @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "region_localities",
-            joinColumns = @JoinColumn(name = "region_id"),
-            inverseJoinColumns = @JoinColumn(name = "locality_id")
-    )
-    private List<Locality> localities;
+    @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
+    private List<Locality> localities = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Region{" +
+                "name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", country=" + country +
+                '}';
+    }
 }

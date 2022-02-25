@@ -22,4 +22,8 @@ public interface UserManagementResource {
     @Operation(summary = "Получить профиль пользователя по id")
     @GetMapping("/user/{userId}}")
     ResponseEntity<User> profileById(@PathVariable("userId") long userId);
+
+    @Operation(summary = "Получить профиль пользователя по логину")
+    @GetMapping("/user/{username}}")
+    ResponseEntity<User> profileByUsername(@PathVariable("username") String username);
 }

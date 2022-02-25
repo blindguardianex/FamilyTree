@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import lombok.extern.jackson.Jacksonized;
 import org.brutforcer.service.user.entity.Address;
 import org.brutforcer.service.user.entity.User;
 import org.brutforcer.service.user.entity.UserProfile;
@@ -35,10 +33,13 @@ public record UserRegistryDto(
         String email,
         @Pattern(regexp = "^(\\+)?((\\d{2,3}) ?\\d|\\d)(([ -]?\\d)|( ?(\\d{2,3}) ?)){5,12}\\d$", message = "Введите корректный номер телефона")
         String phoneNumber,
+        @NotNull
         @JsonDeserialize(using = LocalDateDeserializer.class)
         @JsonSerialize(using = LocalDateSerializer.class)
         @JsonFormat(pattern = "yyyy-MM-dd")
-        LocalDate birthDate) {
+        LocalDate birthDate,
+        @NotNull
+        Address birthPlace) {
 
     public User toUser() {
         return new User()
@@ -52,6 +53,7 @@ public record UserRegistryDto(
                                 .setEmail(email)
                                 .setPhoneNumber(phoneNumber)
                                 .setBirthDate(birthDate)
+                                .setBirthPlace(birthPlace)
                 );
     }
 }

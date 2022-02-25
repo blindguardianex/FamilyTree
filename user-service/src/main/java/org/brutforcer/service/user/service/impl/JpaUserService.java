@@ -10,24 +10,29 @@ import java.util.Optional;
 @Service
 public class JpaUserService implements UserService {
 
-    private final UserRepository userRepository;
+    private final UserRepository repository;
 
-    public JpaUserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public JpaUserService(UserRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public User add(User user) {
-        return userRepository.saveAndFlush(user);
+        return repository.saveAndFlush(user);
     }
 
     @Override
     public User update(User user) {
-        return userRepository.saveAndFlush(user);
+        return repository.saveAndFlush(user);
     }
 
     @Override
     public Optional<User> getById(long id) {
-        return userRepository.findById(id);
+        return repository.findById(id);
+    }
+
+    @Override
+    public Optional<User> getByUsername(String username) {
+        return repository.getUserByUsername(username);
     }
 }

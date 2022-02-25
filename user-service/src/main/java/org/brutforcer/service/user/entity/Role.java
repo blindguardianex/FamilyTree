@@ -5,12 +5,14 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 
 @Data
 @Accessors(chain = true)
 @Entity
+@Table(name = "roles")
 public class Role extends BaseEntity{
 
     @NotBlank

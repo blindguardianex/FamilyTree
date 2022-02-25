@@ -1,9 +1,9 @@
 -- Таблица основного профиля
 create table if not exists users(
     "id"        bigserial       PRIMARY KEY,
-    created     timestamp       not null,
+    created     timestamp       not null    default now(),
     updated     timestamp,
-    status      varchar(15)     not null,
+    status      varchar(15)     not null    default 'ACTIVE',
     username    varchar(255)    not null unique ,
     password    varchar(255)    not null,
     first_name  varchar(255)    not null,
@@ -29,9 +29,9 @@ comment on column users.phone_number is 'Номер телефона польз�
 -- Таблица ролей
 create table if not exists roles(
     "id"		bigserial	    PRIMARY KEY,
-    created 	timestamp       not null,
+    created 	timestamp       not null    default now(),
     updated		timestamp,
-    status	    varchar(15)    not null,
+    status	    varchar(15)    not null default 'ACTIVE',
     "name"	    varchar(255)   not null unique
 );
 comment on table roles is 'Роли пользователей';

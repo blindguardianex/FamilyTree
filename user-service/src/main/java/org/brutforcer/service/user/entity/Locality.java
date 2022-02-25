@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Accessors(chain = true)
 @Entity
+@Table(name = "localities")
 public class Locality extends BaseEntity{
 
     @NotBlank
@@ -23,8 +24,9 @@ public class Locality extends BaseEntity{
     @Column(name = "type")
     private Type type;
 
-    @OneToOne(targetEntity = Address.class)
-    @JoinColumn(name = "region_id", insertable = false, updatable = false)
+    @NotNull
+    @ManyToOne(optional = false, targetEntity = Region.class)
+    @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 
     public static enum Type{
@@ -37,5 +39,14 @@ public class Locality extends BaseEntity{
         Type(String description) {
             this.description = description;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Locality{" +
+                "name='" + name + '\'' +
+                ", type=" + type +
+                ", region=" + region +
+                '}';
     }
 }

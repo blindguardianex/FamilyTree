@@ -9,4 +9,5 @@ public interface UserService {
     User add(User user);
     User update(User user);
     Optional<User> getById(long id);
+    Optional<User> getByUsername(String username);
 }

@@ -9,5 +9,5 @@ public interface AddressService {
 
     Address add(Address address);
     Address update(Address address);
-    Optional<Address> getById(Long id);
+    Optional<Address> getById(long id);
 }
