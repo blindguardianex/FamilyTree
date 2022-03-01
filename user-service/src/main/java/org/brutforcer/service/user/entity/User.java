@@ -2,6 +2,7 @@ package org.brutforcer.service.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @Entity
+@NoArgsConstructor
 @Table(name = "users")
 public class User extends BaseEntity{
 

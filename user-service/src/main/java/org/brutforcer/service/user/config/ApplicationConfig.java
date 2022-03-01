@@ -9,7 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @ComponentScan({
-        "org.brutforcer.module.swagger"
+        "org.brutforcer.module.swagger",
+        "org.brutforcer.service.user"
 })
 @Configuration
 public class ApplicationConfig {

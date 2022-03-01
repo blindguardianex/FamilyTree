@@ -1,6 +1,7 @@
 package org.brutforcer.service.user.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.brutforcer.service.user.enums.Status;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Accessors(chain = true)
 @Entity
+@NoArgsConstructor
 @Table(name = "localities")
 public class Locality extends BaseEntity{
 

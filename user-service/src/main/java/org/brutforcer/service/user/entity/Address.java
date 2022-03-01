@@ -1,6 +1,7 @@
 package org.brutforcer.service.user.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Data
 @Accessors(chain = true)
 @Entity
+@NoArgsConstructor
 @Table(name = "addresses")
 public class Address extends BaseEntity{
 

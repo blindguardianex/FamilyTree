@@ -13,7 +13,6 @@ import org.brutforcer.service.user.entity.UserProfile;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-//todo: add address to attributes
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record UserRegistryDto(
         @NotBlank(message = "Введите логин")

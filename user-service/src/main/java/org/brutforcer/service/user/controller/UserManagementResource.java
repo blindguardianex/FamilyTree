@@ -20,10 +20,10 @@ public interface UserManagementResource {
     ResponseEntity<User> signUp(@RequestBody @Valid UserRegistryDto registryDto);
 
     @Operation(summary = "Получить профиль пользователя по id")
-    @GetMapping("/user/{userId}}")
+    @GetMapping("/user/{userId}")
     ResponseEntity<User> profileById(@PathVariable("userId") long userId);
 
     @Operation(summary = "Получить профиль пользователя по логину")
-    @GetMapping("/user/{username}}")
+    @GetMapping("/user/{username}")
     ResponseEntity<User> profileByUsername(@PathVariable("username") String username);
 }

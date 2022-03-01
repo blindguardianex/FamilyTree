@@ -1,6 +1,7 @@
 package org.brutforcer.service.user.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @Data
 @Accessors(chain = true)
 @Embeddable
+@NoArgsConstructor
 public class UserProfile {
 
     @NotBlank
