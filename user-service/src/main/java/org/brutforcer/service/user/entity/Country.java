@@ -1,10 +1,19 @@
 package org.brutforcer.service.user.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@Accessors(chain = true)
 @Entity
+@NoArgsConstructor
+@Table(name = "countries")
 public class Country extends BaseEntity{
 
     @NotBlank
@@ -15,13 +24,14 @@ public class Country extends BaseEntity{
     @Column(name = "code", nullable = false)
     private String code;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "country_regions",
-            joinColumns = @JoinColumn(name = "country_id"),
-            inverseJoinColumns = @JoinColumn(name = "region_id")
-    )
-    private List<Region> regions;
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+    private List<Region> regions = new ArrayList<>();
 
-
+    @Override
+    public String toString() {
+        return "Country{" +
+                "name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }

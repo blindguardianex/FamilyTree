@@ -39,6 +39,7 @@ public class SwaggerConfig {
                 .contact(new Contact().name("Titov Dmitry").url("https://github.com/blindguardianex/"));
     }
 
+    //TODO: брать сервера из конфига. В конфиг добавить адрес прямой, и через шлюз.
     private List<Server> servers() {
         return List.of(
                 new Server().url("http://localhost:8080/family-tree").description("Внешний API (шлюз) приложения"),

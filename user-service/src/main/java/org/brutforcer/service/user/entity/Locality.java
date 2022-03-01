@@ -1,5 +1,8 @@
 package org.brutforcer.service.user.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.brutforcer.service.user.enums.Status;
 
 import javax.persistence.*;
@@ -7,7 +10,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
+@Accessors(chain = true)
 @Entity
+@NoArgsConstructor
+@Table(name = "localities")
 public class Locality extends BaseEntity{
 
     @NotBlank
@@ -19,8 +26,9 @@ public class Locality extends BaseEntity{
     @Column(name = "type")
     private Type type;
 
-    @OneToOne(targetEntity = Address.class)
-    @JoinColumn(name = "region_id", insertable = false, updatable = false)
+    @NotNull
+    @ManyToOne(optional = false, targetEntity = Region.class)
+    @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 
     public static enum Type{
@@ -33,5 +41,14 @@ public class Locality extends BaseEntity{
         Type(String description) {
             this.description = description;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Locality{" +
+                "name='" + name + '\'' +
+                ", type=" + type +
+                ", region=" + region +
+                '}';
     }
 }

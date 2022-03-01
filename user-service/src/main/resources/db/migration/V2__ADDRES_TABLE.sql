@@ -2,9 +2,9 @@
 create table if not exists countries
 (
     "id"        bigserial       PRIMARY KEY,
-    created     timestamp       not null,
+    created     timestamp       not null    default now(),
     updated     timestamp,
-    status      varchar(15)     not null,
+    status      varchar(15)     not null    default 'ACTIVE',
     name        varchar(255)    not null,
     code        varchar(15)      not null
 );
@@ -19,9 +19,9 @@ comment on column countries.code is 'Код страны';
 -- Таблица регионов
 create table if not exists regions(
     "id"        bigserial       PRIMARY KEY,
-    created     timestamp       not null,
+    created     timestamp       not null    default now(),
     updated     timestamp,
-    status      varchar(15)     not null,
+    status      varchar(15)     not null    default 'ACTIVE',
     name        varchar(255)    not null,
     code        varchar(15)     not null ,
     country_id     bigserial    not null
@@ -36,23 +36,12 @@ comment on column regions.name is 'Наименование региона';
 comment on column regions.code is 'Код региона';
 comment on column regions.country_id is 'ИД страны региона';
 
--- Таблица связи стран и регионов
-create table if not exists country_regions(
-    country_id      bigserial   not null,
-    region_id       bigserial   not null
-);
-alter table country_regions add constraint fk_country_regions_country foreign key (country_id) references countries("id") on delete cascade on update cascade;
-alter table country_regions add constraint fk_country_regions_region foreign key (region_id) references regions("id") on delete cascade on update cascade;
-comment on table country_regions is 'Таблица связи стран и регионов';
-comment on column country_regions.country_id is 'ИД страны';
-comment on column country_regions.region_id is 'ИД региона';
-
 -- Таблица населенных пунктов
 create table if not exists localities(
     "id"        bigserial       PRIMARY KEY,
-    created     timestamp       not null,
+    created     timestamp       not null    default now(),
     updated     timestamp,
-    status      varchar(15)     not null,
+    status      varchar(15)     not null    default 'ACTIVE',
     name        varchar(255)    not null,
     type        varchar(255)    not null,
     region_id   bigserial       not null
@@ -67,24 +56,13 @@ comment on column localities.name is 'Наименование населенн�
 comment on column localities.type is 'Тип населенного пункта';
 comment on column localities.region_id is 'Регион населенного пункта';
 
--- Таблица связи регионов и населенных пунктов
-create table if not exists region_localities(
-    region_id      bigserial   not null,
-    locality_id       bigserial   not null
-);
-alter table region_localities add constraint fk_region_localities_region foreign key (region_id) references regions("id") on delete cascade on update cascade;
-alter table region_localities add constraint fk_region_localities_locality foreign key (locality_id) references localities("id") on delete cascade on update cascade;
-comment on table region_localities is 'Таблица связи регионов и населенных пунктов';
-comment on column region_localities.region_id is 'ИД региона';
-comment on column region_localities.locality_id is 'ИД населенного пункта';
-
 -- Таблица адресов
 create table if not exists addresses
 (
     "id"        bigserial       PRIMARY KEY,
-    created     timestamp       not null,
+    created     timestamp       not null    default now(),
     updated     timestamp,
-    status      varchar(15)     not null,
+    status      varchar(15)     not null    default 'ACTIVE',
     country_id  bigserial       not null,
     region_id   bigserial       not null,
     locality_id bigserial       not null

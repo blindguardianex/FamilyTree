@@ -30,7 +30,7 @@ public abstract class BaseEntity {
     @Column(name = "updated")
     private LocalDateTime updated;
 
-    @NotBlank
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
@@ -40,6 +40,7 @@ public abstract class BaseEntity {
         if (this.created == null) {
             this.created = LocalDateTime.now();
         }
+        this.status = Status.ACTIVE;
     }
 
     @PreUpdate
