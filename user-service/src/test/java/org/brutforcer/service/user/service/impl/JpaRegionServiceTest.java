@@ -32,12 +32,6 @@ class JpaRegionServiceTest {
     }
 
     @Test
-    void loadWithoutCountry() {
-        Region region = new Region();
-        assertThrows(IllegalArgumentException.class, ()->regionService.saveOrLoad(region), "Cannot identified region without country");
-    }
-
-    @Test
     void loadWithId(){
         Region region = new Region();
         region.setId(1L);
@@ -47,13 +41,10 @@ class JpaRegionServiceTest {
     }
 
     @Test
-    void loadWithNameAndCodeAndCountryId(){
-        Country country = new Country().setName("Российская Федерация").setCode("RUS");
-        country.setId(1L);
+    void loadWithNameAndCode(){
         Region region = new Region()
                 .setName("Тульская область")
-                .setCode("71")
-                .setCountry(country);
+                .setCode("71");
 
         Region loaded = regionService.saveOrLoad(region);
         assertEquals(region, loaded);
@@ -62,26 +53,20 @@ class JpaRegionServiceTest {
     }
 
     @Test
-    void loadWithNameAndCodeAndCountryNameAndCountryCode(){
-        Country country = new Country().setName("Российская Федерация").setCode("RUS");
+    void saveWithoutCountry() {
         Region region = new Region()
-                .setName("Тульская область")
-                .setCode("71")
-                .setCountry(country);
-
-        Region loaded = regionService.saveOrLoad(region);
-        assertEquals(region, loaded);
-        assertNotNull(loaded.getId());
-        assertEquals(loaded.getId(), 1L);
+                .setName("Неизвестный регион")
+                .setCode("UNKNOWN");
+        assertThrows(IllegalArgumentException.class, ()->regionService.saveOrLoad(region), "Cannot save region without country");
     }
 
     @Test
-    void saving_notFoundByNameAndCodeAndCountryId(){
+    void saved_countryWithId(){
         Country country = new Country();
         country.setId(4L);
         Region region = new Region()
-                .setName("Тульская область")
-                .setCode("71")
+                .setName("Новый регион")
+                .setCode("NEW_REG")
                 .setCountry(country);
 
         Region saved = regionService.saveOrLoad(region);
@@ -92,13 +77,13 @@ class JpaRegionServiceTest {
     }
 
     @Test
-    void saving_notFoundByNameAndCodeAndCountryNameAndCountryCode(){
+    void saved_countryWithoutId(){
         Country country = new Country()
                 .setName("Королевство Испания")
                 .setCode("ESP");
         Region region = new Region()
-                .setName("Тульская область")
-                .setCode("71")
+                .setName("Новый регион")
+                .setCode("NEW_REG")
                 .setCountry(country);
 
         Region saved = regionService.saveOrLoad(region);

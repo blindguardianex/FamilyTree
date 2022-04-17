@@ -29,15 +29,7 @@ public class JpaRegionService implements RegionService {
         if (region.getId() != null)
             return saveOrGetById(region);
 
-        if (region.getCountry() == null){
-            log.error("Cannot identified region {} without country", region);
-            throw new IllegalArgumentException("Cannot identified region without country");
-        }
-
-        if (region.getCountry().getId() != null)
-            return saveOrGetByNameAndCodeAndCountryId(region);
-
-        return saveOrGetByNameAndCodeAndCountryNameAndCountryCode(region);
+        return saveOrGetByNameAndCode(region);
     }
 
     @Override
@@ -58,21 +50,28 @@ public class JpaRegionService implements RegionService {
                 });
     }
 
-    private Region saveOrGetByNameAndCodeAndCountryId(Region region) {
-        return repository.findByNameAndCodeAndCountry(region.getName(), region.getCode(), region.getCountry())
+    private Region saveOrGetByNameAndCode(Region region) {
+        return repository.findByNameAndCode(region.getName(), region.getCode())
                 .map(existing -> {
-                    log.info("IN saveOrGetByNameAndCountryId -> region with name {} and code {} already exist with id: {}. Loaded", region.getName(), region.getCode(), existing.getId());
+                    log.info("IN saveOrGetByNameAndCode -> region with name {} and code {} already exist with id: {}. Loaded", region.getName(), region.getCode(), existing.getId());
                     return existing;
                 })
                 .orElseGet(() -> {
+                    checkNotNullCountry(region);
+
+                    if (region.getCountry().getId() == null)
+                        region.setCountry(countryService.saveOrLoad(region.getCountry()));
+
                     var saved = repository.save(region);
-                    log.info("IN saveOrGetByNameAndCountryId -> saved region with name {} and code {} with id: {}", region.getName(), region.getCode(), saved.getId());
+                    log.info("IN saveOrGetByNameAndCode -> saved region with name {} and code {} with id: {}", region.getName(), region.getCode(), saved.getId());
                     return saved;
                 });
     }
 
-    private Region saveOrGetByNameAndCodeAndCountryNameAndCountryCode(Region region) {
-        Country country = countryService.saveOrLoad(region.getCountry());
-        return saveOrGetByNameAndCodeAndCountryId(region.setCountry(country));
+    private void checkNotNullCountry(Region region) {
+        if (region.getCountry() == null){
+            log.error("Cannot save region {} without country", region);
+            throw new IllegalArgumentException("Cannot save region without country");
+        }
     }
 }

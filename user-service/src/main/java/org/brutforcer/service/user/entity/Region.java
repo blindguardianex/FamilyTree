@@ -51,12 +51,12 @@ public class Region extends BaseEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Region region = (Region) o;
-        return Objects.equals(name, region.name) && Objects.equals(code, region.code) && Objects.equals(country, region.country);
+        return Objects.equals(name, region.name) && Objects.equals(code, region.code);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, code, country);
+        return Objects.hash(super.hashCode(), name, code);
     }
 
     @Override

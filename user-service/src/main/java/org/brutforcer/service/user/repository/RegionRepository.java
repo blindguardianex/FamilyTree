@@ -10,8 +10,8 @@ import java.util.Optional;
 @Repository
 public interface RegionRepository extends JpaRepository<Region, Long> {
 
-    //select * from regions where name = :name, code = :code, country_id = :country
-    Optional<Region> findByNameAndCodeAndCountry(String name, String code, Country country);
+    //select * from regions where name = :name, code = :code
+    Optional<Region> findByNameAndCode(String name, String code);
 
     Optional<Region> findByNameAndCodeAndCountry_NameAndCountry_Code(String name, String code, String countryName, String countryCode);
 }

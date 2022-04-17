@@ -29,7 +29,7 @@ create table if not exists regions(
     country_id     bigserial    not null
 );
 alter table regions add constraint fk_region_country foreign key (country_id) references countries("id");
-create unique index region_name_code_country_idx on regions(name, code, country_id);
+create unique index region_name_code_idx on regions(name, code);
 
 comment on table regions is 'Таблица регионов';
 comment on column regions.id is 'ИД региона';
