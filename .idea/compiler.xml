@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-service" />
+        <module name="common" />
         <module name="authorization-service" />
         <module name="user-service" />
         <module name="swagger-module" />
@@ -20,6 +21,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="authorization-service" options="-parameters" />
+      <module name="common" options="-parameters" />
       <module name="config-service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
       <module name="gateway" options="-parameters" />

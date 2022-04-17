@@ -3,6 +3,7 @@ package org.brutforcer.service.user.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.brutforcer.service.user.enums.Status;
 
@@ -15,21 +16,25 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class BaseEntity {
 
+    @Schema(hidden = true)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
+    @Schema(hidden = true)
     @NotNull
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created")
     private LocalDateTime created;
 
+    @Schema(hidden = true)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "updated")
     private LocalDateTime updated;
 
+    @Schema(hidden = true)
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

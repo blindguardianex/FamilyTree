@@ -27,7 +27,14 @@ public class JpaAddressService implements AddressService {
     }
 
     @Override
+    public Address upsert(Address address) {
+        return null;
+    }
+
+    @Override
     public Optional<Address> getById(long id) {
         return repository.findById(id);
     }
+
+
 }

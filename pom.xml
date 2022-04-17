@@ -15,6 +15,7 @@
         <module>swagger-module</module>
         <module>config-service</module>
         <module>discovery-service</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -29,6 +30,7 @@
         <jackson.datatype.version>2.13.0</jackson.datatype.version>
         <flyway.version>8.3.0</flyway.version>
         <lombok.version>1.18.22</lombok.version>
+        <google.guava>31.0.1-jre</google.guava>
     </properties>
 
     <parent>

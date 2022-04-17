@@ -1,5 +1,6 @@
 package org.brutforcer.service.user.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Schema(description = "Населенный пункт")
 @Data
 @Accessors(chain = true)
 @Entity
@@ -17,15 +19,18 @@ import javax.validation.constraints.NotNull;
 @Table(name = "localities")
 public class Locality extends BaseEntity{
 
+    @Schema(description = "Наименование населенного пункта", example = "Тула")
     @NotBlank
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Schema(description = "Тип населенного пункта", example = "CITY")
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private Type type;
 
+    @Schema(hidden = true)
     @NotNull
     @ManyToOne(optional = false, targetEntity = Region.class)
     @JoinColumn(name = "region_id", nullable = false)

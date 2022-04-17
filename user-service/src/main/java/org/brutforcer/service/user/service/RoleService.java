@@ -13,4 +13,5 @@ public interface RoleService {
     List<Role>getAll();
     Optional<Role> getById(long id);
     Optional<Role> getByName(String name);
+    void delete(Role role);
 }

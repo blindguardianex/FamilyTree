@@ -1,7 +1,6 @@
 package org.brutforcer.service.user.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
@@ -9,12 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-
-@Data
+@Setter
+@Getter
 @Accessors(chain = true)
 @Entity
 @NoArgsConstructor
 @Table(name = "roles")
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class Role extends BaseEntity{
 
     @NotBlank
