@@ -6,8 +6,10 @@ create table if not exists countries
     updated     timestamp,
     status      varchar(15)     not null    default 'ACTIVE',
     name        varchar(255)    not null,
-    code        varchar(15)      not null
+    code        varchar(15)     not null
 );
+create unique index country_name_code_idx on countries (name, code);
+
 comment on table countries is 'Таблица стран';
 comment on column countries.id is 'ИД страны';
 comment on column countries.created is 'Дата создания страны';
@@ -23,10 +25,12 @@ create table if not exists regions(
     updated     timestamp,
     status      varchar(15)     not null    default 'ACTIVE',
     name        varchar(255)    not null,
-    code        varchar(15)     not null ,
+    code        varchar(15)     not null,
     country_id     bigserial    not null
 );
 alter table regions add constraint fk_region_country foreign key (country_id) references countries("id");
+create unique index region_name_code_country_idx on regions(name, code, country_id);
+
 comment on table regions is 'Таблица регионов';
 comment on column regions.id is 'ИД региона';
 comment on column regions.created is 'Дата создания региона';
@@ -47,6 +51,8 @@ create table if not exists localities(
     region_id   bigserial       not null
 );
 alter table localities add constraint fk_locality_region foreign key (region_id) references regions("id");
+create unique index locality_name_type_region_idx on localities(name, type, region_id);
+
 comment on table localities is 'Таблица населенных пунктов';
 comment on column localities.id is 'ИД населенного пункта';
 comment on column localities.created is 'Дата создания населенного пункта';

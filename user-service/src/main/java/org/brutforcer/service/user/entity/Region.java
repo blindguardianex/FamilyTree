@@ -2,8 +2,12 @@ package org.brutforcer.service.user.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.builder.EqualsExclude;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,9 +15,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Schema(description = "Регион")
-@Data
+@Setter
+@Getter
 @Accessors(chain = true)
 @Entity
 @NoArgsConstructor
@@ -39,6 +45,19 @@ public class Region extends BaseEntity{
     @Schema(hidden = true)
     @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
     private List<Locality> localities = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Region region = (Region) o;
+        return Objects.equals(name, region.name) && Objects.equals(code, region.code) && Objects.equals(country, region.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, code, country);
+    }
 
     @Override
     public String toString() {

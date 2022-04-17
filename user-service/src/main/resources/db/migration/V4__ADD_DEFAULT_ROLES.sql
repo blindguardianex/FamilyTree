@@ -1,6 +1,6 @@
-insert into roles (created, updated, status, name)
+insert into roles (id, created, updated, status, name)
     values
-        (now(), null, 'ACTIVE', 'ADMIN'),
-        (now(), null, 'ACTIVE', 'SYSTEM'),
-        (now(), null, 'ACTIVE', 'USER'),
-        (now(), null, 'ACTIVE', 'ADVANCED_USER')
+        (nextval('roles_id_seq'), now(), null, 'ACTIVE', 'ADMIN'),
+        (nextval('roles_id_seq'), now(), null, 'ACTIVE', 'SYSTEM'),
+        (nextval('roles_id_seq'), now(), null, 'ACTIVE', 'USER'),
+        (nextval('roles_id_seq'), now(), null, 'ACTIVE', 'ADVANCED_USER');

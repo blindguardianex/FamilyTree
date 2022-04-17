@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Table(name = "addresses")
-public class Address extends BaseEntity{
+public class Address extends BaseEntity {
 
     @Schema(description = "Страна")
     @OneToOne(optional = false, targetEntity = Country.class, cascade = CascadeType.ALL)
@@ -32,8 +32,6 @@ public class Address extends BaseEntity{
 
     @Override
     public String toString() {
-        return "country: " + country +
-                ", \nregion: " + region +
-                ", \nlocality: " + locality;
+        return "Address: " + country.getName() + ", " + region.getName() + ", " + locality.getName();
     }
 }

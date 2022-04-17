@@ -1,7 +1,7 @@
 package org.brutforcer.service.user.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.brutforcer.common.exceptions.UpdatingNonExistEntity;
+import org.brutforcer.common.exceptions.NonExistEntity;
 import org.brutforcer.service.user.entity.Role;
 import org.brutforcer.service.user.service.RoleService;
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,10 +54,10 @@ class JpaRoleServiceTest {
 
     @Test
     void update() {
-        assertThrows(UpdatingNonExistEntity.class, ()->roleService.update(new Role()));
+        assertThrows(NonExistEntity.class, ()->roleService.update(new Role()), "Was attempt updating role, but: role id is null");
         final Role finalRole = new Role();
         finalRole.setId(0L);
-        assertThrows(UpdatingNonExistEntity.class, ()->roleService.update(finalRole));
+        assertThrows(NonExistEntity.class, ()->roleService.update(finalRole),"Was attempt updating role, but: role with id " + finalRole.getId() + " not found");
 
         final String existingName = "SYSTEM";
 

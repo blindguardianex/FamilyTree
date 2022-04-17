@@ -3,7 +3,7 @@ package org.brutforcer.service.user.service.impl;
 import com.google.common.cache.LoadingCache;
 import lombok.extern.slf4j.Slf4j;
 import org.brutforcer.common.Caches;
-import org.brutforcer.common.exceptions.UpdatingNonExistEntity;
+import org.brutforcer.common.exceptions.NonExistEntity;
 import org.brutforcer.service.user.entity.Role;
 import org.brutforcer.service.user.repository.RoleRepository;
 import org.brutforcer.service.user.service.RoleService;
@@ -47,7 +47,7 @@ public class JpaRoleService implements RoleService {
     @Override
     public Role update(Role role) {
         if (role.getId() == null)
-            throw new UpdatingNonExistEntity("Was attempt updating role, but: role id is null");
+            throw new NonExistEntity("Was attempt updating role, but: role id is null");
 
         log.debug("IN update -> updating role: {}", role.getName());
         Optional<Role> roleOpt = this.getById(role.getId());
@@ -59,7 +59,7 @@ public class JpaRoleService implements RoleService {
                 })
                 .orElseThrow(() -> {
                     log.error("IN update -> Was attempt updating role \"{}\", but: role with id {} not found", role.getName(), role.getId());
-                    throw new UpdatingNonExistEntity("Was attempt updating role, but: role with id " + role.getId() + " not found");
+                    throw new NonExistEntity("Was attempt updating role, but: role with id " + role.getId() + " not found");
                 });
     }
 
