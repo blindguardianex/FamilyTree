@@ -11,15 +11,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableAuthorizationServer
 public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
+    //todo: Возможно, вынести в отдельный модуль security, что бы был единым бином тут и в сервисе управления пользователями?
     @Bean
     public PasswordEncoder passwordEncoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
-    //todo: перенести эндпоинт регистрации в данный сервис
-    // (все должно остаться, но роль для доступа к ендпоинту
-    // регистрации у юзер сервиса должен остаться только у сервера аутентификации.
-    // После регистрации юзер сервис кидает событие в очередь событий, а сервер авторизации
-    // сохраняет необходимые данные о пользователе в локальной бд).
-
 }

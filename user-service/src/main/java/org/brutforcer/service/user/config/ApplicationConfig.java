@@ -7,6 +7,8 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ComponentScan({
         "org.brutforcer.module.swagger",
@@ -22,4 +24,9 @@ public class ApplicationConfig {
                 .build();
     }
 
+    //todo: Возможно, вынести в отдельный модуль security, что бы был единым бином тут и в сервисе авторизации?
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 }
