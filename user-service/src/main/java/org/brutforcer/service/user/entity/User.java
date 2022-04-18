@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.brutforcer.service.user.enums.Sex;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

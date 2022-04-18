@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.brutforcer.service.user.entity.Address;
 import org.brutforcer.service.user.entity.User;
 import org.brutforcer.service.user.entity.UserProfile;
+import org.brutforcer.service.user.enums.Sex;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -40,6 +41,10 @@ public record UserRegistryDto(
         @NotBlank(message = "Введите отчество")
         String otherName,
 
+        @Schema(description = "Пол", example = "MALE")
+        @NotBlank(message = "Укажите пол")
+        Sex sex,
+
         @Schema(description = "Адрес электронной почты", example = "ferz@mail.ru")
         @NotBlank(message = "Введите адрес электронной почты")
         @Email(message = "Введите корректный адрес электронной почты")
@@ -69,6 +74,7 @@ public record UserRegistryDto(
                                 .setFirstName(firstName)
                                 .setLastName(lastName)
                                 .setOtherName(otherName)
+                                .setSex(sex)
                                 .setEmail(email)
                                 .setPhoneNumber(phoneNumber)
                                 .setBirthDate(birthDate)

@@ -71,7 +71,8 @@ create table if not exists addresses
     status      varchar(15)     not null    default 'ACTIVE',
     country_id  bigserial       not null,
     region_id   bigserial       not null,
-    locality_id bigserial       not null
+    locality_id bigserial       not null,
+    text_address    text    unique  not null
 );
 alter table addresses add constraint fk_address_country foreign key (country_id) references countries("id");
 alter table addresses add constraint fk_address_region foreign key (region_id) references regions("id");
@@ -84,3 +85,4 @@ comment on column addresses.status is 'Статус адреса';
 comment on column addresses.country_id is 'ИД страны';
 comment on column addresses.region_id is 'ИД региона (внутри страны)';
 comment on column addresses.locality_id is 'ИД населенного пункта';
+comment on column addresses.text_address is 'Уникальное строковое представление адреса';

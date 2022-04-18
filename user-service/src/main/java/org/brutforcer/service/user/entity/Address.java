@@ -15,6 +15,10 @@ import javax.persistence.*;
 @Table(name = "addresses")
 public class Address extends BaseEntity {
 
+    @Schema(hidden = true)
+    @Column(name = "text_address", nullable = false)
+    private String textAddress;
+
     @Schema(description = "Страна")
     @OneToOne(optional = false, targetEntity = Country.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id", nullable = false)

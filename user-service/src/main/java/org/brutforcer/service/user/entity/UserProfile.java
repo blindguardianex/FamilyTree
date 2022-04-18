@@ -3,6 +3,7 @@ package org.brutforcer.service.user.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.brutforcer.service.user.enums.Sex;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -29,6 +30,11 @@ public class UserProfile {
     @NotBlank
     @Column(name = "other_name", nullable = false)
     private String otherName;
+
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sex", nullable = false)
+    private Sex sex;
 
     @NotBlank
     @Email

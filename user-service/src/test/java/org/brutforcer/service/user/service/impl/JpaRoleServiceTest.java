@@ -28,7 +28,6 @@ class JpaRoleServiceTest {
         var testRole = new Role().setName("TEST_ROLE");
         var savedRole = roleService.add(testRole);
         assertEquals(testRole, savedRole);
-        log.info("Saved role: {}", savedRole);
         roleService.delete(savedRole);
         var deletedRole = roleService.getById(savedRole.getId());
         assertTrue(deletedRole.isEmpty());
