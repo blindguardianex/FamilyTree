@@ -2,6 +2,7 @@ package org.brutforcer.service.user.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.brutforcer.service.user.enums.Status;
@@ -36,6 +37,7 @@ public class Locality extends BaseEntity{
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 
+    @Getter
     public static enum Type{
         SETTLEMENT("Поселок городского типа"),
         COUNTRY("Деревня"),
