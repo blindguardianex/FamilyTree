@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface LocalityRepository extends JpaRepository<Locality, Long> {
 
     //select * from localities where name = :name and region_id = :regionId
-    Optional<Locality> findByNameAndRegion(String name, Region region);
+    Optional<Locality> findByNameAndTypeAndRegion(String name, Locality.Type type, Region region);
 
     //select * from localities where name = :name and region_id.name = :regionName and region_id.code = :regionCode
-    Optional<Locality> findByNameAndRegion_NameAndRegion_Code(String name, String regionName, String regionCode);
+    Optional<Locality> findByNameAndTypeAndRegion_NameAndRegion_Code(String name, Locality.Type type, String regionName, String regionCode);
 }

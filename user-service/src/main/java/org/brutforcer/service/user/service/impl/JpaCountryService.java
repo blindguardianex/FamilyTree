@@ -3,7 +3,6 @@ package org.brutforcer.service.user.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.brutforcer.common.exceptions.NonExistEntity;
 import org.brutforcer.service.user.entity.Country;
-import org.brutforcer.service.user.entity.Locality;
 import org.brutforcer.service.user.repository.CountryRepository;
 import org.brutforcer.service.user.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +23,12 @@ public class JpaCountryService implements CountryService {
     public Country saveOrLoad(Country country) {
         log.debug("IN saveOrLoad -> {}", country);
         if (country.getId() != null)
-            return saveOrGetById(country);
+            return getById(country);
 
         return saveOrGetByNameAndCode(country);
     }
 
-    private Country saveOrGetById(Country country) {
+    private Country getById(Country country) {
         return repository.findById(country.getId())
                 .map(existing -> {
                     log.info("IN saveOrGetById -> loaded country with id: {}", existing.getId());

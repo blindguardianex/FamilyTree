@@ -48,6 +48,8 @@ public class Locality extends BaseEntity{
         }
     }
 
+
+
     @Override
     public String toString() {
         return "Locality{" +

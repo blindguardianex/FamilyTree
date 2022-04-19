@@ -20,7 +20,7 @@ public class JpaAddressService implements AddressService {
     }
 
     @Override
-    public Address add(Address address) {
+    public Address registry(Address address) {
         log.debug("IN add -> creating new address: {}", address.toString());
         Optional<Address> addressOpt = this.getByCountryIdAndRegionIdAndLocalityId(address.getCountry().getId(), address.getRegion().getId(), address.getLocality().getId());
         return addressOpt.map(existing -> {

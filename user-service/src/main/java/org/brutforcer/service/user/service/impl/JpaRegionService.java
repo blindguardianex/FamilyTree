@@ -2,7 +2,6 @@ package org.brutforcer.service.user.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.brutforcer.common.exceptions.NonExistEntity;
-import org.brutforcer.service.user.entity.Country;
 import org.brutforcer.service.user.entity.Region;
 import org.brutforcer.service.user.repository.RegionRepository;
 import org.brutforcer.service.user.service.CountryService;
@@ -27,7 +26,7 @@ public class JpaRegionService implements RegionService {
     public Region saveOrLoad(Region region) {
         log.debug("IN saveOrLoad -> {}", region);
         if (region.getId() != null)
-            return saveOrGetById(region);
+            return getById(region);
 
         return saveOrGetByNameAndCode(region);
     }
@@ -38,7 +37,7 @@ public class JpaRegionService implements RegionService {
         log.info("Deleted region: {}", region);
     }
 
-    private Region saveOrGetById(Region region) {
+    private Region getById(Region region) {
         return repository.findById(region.getId())
                 .map(existing -> {
                     log.info("IN saveOrGetById -> loaded region with id: {}", existing.getId());
