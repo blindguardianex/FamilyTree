@@ -9,7 +9,6 @@ public interface AddressService {
 
     Address registry(Address address);
     Address update(Address address);
-    Address upsert(Address address);
     Optional<Address> getById(long id);
     Optional<Address> getByTextAddress(String address);
 }

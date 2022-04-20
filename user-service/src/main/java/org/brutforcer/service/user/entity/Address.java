@@ -36,6 +36,6 @@ public class Address extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Address: " + country.getName() + ", " + region.getName() + ", " + locality.getName();
+        return "Address: " + country.getName() + ", " + region.getName() + ", " + locality.getName() + " " +locality.getType().getDescription();
     }
 }
