@@ -15,6 +15,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/user-management")
 public interface UserManagementResource {
 
+    @CrossOrigin
     @Operation(summary = "Зарегистрировать пользователя")
     @PostMapping("/user")
     ResponseEntity<User> signUp(@RequestBody @Valid UserRegistryDto registryDto);

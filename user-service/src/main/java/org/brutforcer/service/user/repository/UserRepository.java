@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    //SELECT * FROM users s WHERE s.login = :username
     Optional<User> getUserByUsername(String username);
     Optional<User> getByProfileEmail(String email);
     Optional<User> getByProfilePhoneNumber(String phoneNumber);
