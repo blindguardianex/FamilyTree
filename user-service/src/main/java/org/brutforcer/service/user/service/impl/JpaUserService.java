@@ -1,9 +1,12 @@
 package org.brutforcer.service.user.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.brutforcer.common.exceptions.EntityAlreadyExist;
+import org.brutforcer.common.exceptions.NonExistEntity;
 import org.brutforcer.service.user.entity.User;
 import org.brutforcer.service.user.repository.UserRepository;
 import org.brutforcer.service.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,27 +17,56 @@ public class JpaUserService implements UserService {
 
     private final UserRepository repository;
 
+    @Autowired
     public JpaUserService(UserRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public User add(User user) {
-        return repository.saveAndFlush(user);
+    public User create(User user) throws EntityAlreadyExist {
+        log.debug("IN create -> creating user: {}", user);
+        var byUsername = getByUsername(user.getUsername());
+        if (byUsername.isPresent()) {
+            log.error("IN create -> was attempt creating user with username {}, but: already exist", user.getUsername());
+            throw new EntityAlreadyExist("User with username " + user.getUsername() + " already exist");
+        }
+        var saved = repository.saveAndFlush(user);
+        log.info("IN create -> User with username {} successfully created with id: {}", saved.getUsername(), saved.getId());
+        return saved;
     }
 
     @Override
     public User update(User user) {
-        return repository.saveAndFlush(user);
+        log.debug("IN update -> creating user: {}", user);
+        var byId = getById(user.getId());
+        if (byId.isEmpty()) {
+            log.error("IN update -> was attempt creating user with id {}, but: not exist", user.getUsername());
+            throw new NonExistEntity("User with id " + user.getId() + " not exist");
+        }
+        var updated = repository.saveAndFlush(user);
+        log.info("IN update -> User with id {} successfully updated", updated.getId());
+        return updated;
     }
 
     @Override
     public Optional<User> getById(long id) {
-        return repository.findById(id);
+        log.debug("IN getById -> loading user with id: {}", id);
+        var user = repository.findById(id);
+        if (user.isPresent())
+            log.info("IN getById -> loaded user with id: {}", id);
+        else
+            log.error("IN getById -> user with id {} not found", id);
+        return user;
     }
 
     @Override
     public Optional<User> getByUsername(String username) {
-        return repository.getUserByUsername(username);
+        log.debug("IN getByUsername -> loading user with username: {}", username);
+        var user = repository.getUserByUsername(username);
+        if (user.isPresent())
+            log.info("IN getByUsername -> loaded user with username: {}", username);
+        else
+            log.error("IN getByUsername -> user with username {} not found", username);
+        return user;
     }
 }

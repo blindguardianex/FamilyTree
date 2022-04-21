@@ -10,12 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,7 +26,7 @@ class JpaUserServiceTest {
         var country = new Country().setName("Russian Federation").setCode("RF");
         var region = new Region().setName("Tulskaya oblast").setCode("71").setCountry(country);
         var locality = new Locality().setName("Aleksin").setType(Locality.Type.CITY).setRegion(region);
-        var add = userService.add(
+        var add = userService.create(
                 new User()
                         .setUsername("TEST_login")
                         .setPassword("TEST_pass")

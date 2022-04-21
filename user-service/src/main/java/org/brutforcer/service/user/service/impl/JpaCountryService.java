@@ -23,20 +23,20 @@ public class JpaCountryService implements CountryService {
     public Country saveOrLoad(Country country) {
         log.debug("IN saveOrLoad -> {}", country);
         if (country.getId() != null)
-            return getById(country);
+            return getById(country.getId());
 
         return saveOrGetByNameAndCode(country);
     }
 
-    private Country getById(Country country) {
-        return repository.findById(country.getId())
+    private Country getById(long id) {
+        return repository.findById(id)
                 .map(existing -> {
-                    log.info("IN saveOrGetById -> loaded country with id: {}", existing.getId());
+                    log.info("IN getById -> loaded country with id: {}", existing.getId());
                     return existing;
                 })
                 .orElseThrow(() -> {
-                    log.error("IN saveOrGetById -> country with id {} not exist", country.getId());
-                    throw new NonExistEntity("Сountry with id " + country.getId() + " not exist");
+                    log.error("IN getById -> country with id {} not exist", id);
+                    throw new NonExistEntity("Сountry with id " + id + " not exist");
                 });
     }
 

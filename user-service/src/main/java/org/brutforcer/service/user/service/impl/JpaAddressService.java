@@ -10,7 +10,6 @@ import org.brutforcer.service.user.service.RegionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Slf4j
@@ -67,7 +66,13 @@ public class JpaAddressService implements AddressService {
 
     @Override
     public Optional<Address> getById(long id) {
-        return repository.findById(id);
+        log.debug("IN getById -> loading address with id: {}", id);
+        var address = repository.findById(id);
+        if (address.isPresent())
+            log.info("IN getById -> loaded address with id: {}", id);
+        else
+            log.error("IN getById -> address with id {} not found", id);
+        return address;
     }
 
     @Override
@@ -96,7 +101,7 @@ public class JpaAddressService implements AddressService {
         checkRegionConsistency(address);
         checkLocalityConsistency(address);
 
-        String textAddress = address.getCountry().getName()+", "+address.getRegion().getName() +", "+address.getLocality().getName()+" "+address.getLocality().getType().getDescription();
+        String textAddress = address.getCountry().getName() + ", " + address.getRegion().getName() + ", " + address.getLocality().getName() + " " + address.getLocality().getType().getDescription();
         address.setTextAddress(textAddress);
         return address;
     }
@@ -144,14 +149,14 @@ public class JpaAddressService implements AddressService {
     }
 
     private void checkRegionConsistency(Address address) {
-        if (!address.getRegion().getCountry().equals(address.getCountry())){
+        if (!address.getRegion().getCountry().equals(address.getCountry())) {
             log.error("IN registry -> region country not equals address country");
             throw new IllegalArgumentException("Region country not equals address country");
         }
     }
 
     private void checkLocalityConsistency(Address address) {
-        if (!address.getLocality().getRegion().equals(address.getRegion())){
+        if (!address.getLocality().getRegion().equals(address.getRegion())) {
             log.error("IN registry -> locality region not equals address region");
             throw new IllegalArgumentException("Region country not equals address country");
         }

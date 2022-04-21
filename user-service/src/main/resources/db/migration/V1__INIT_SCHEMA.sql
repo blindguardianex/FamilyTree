@@ -27,7 +27,6 @@ comment on column users.sex is 'Пол пользователя';
 comment on column users.email is 'Адрес электронной почты пользователя';
 comment on column users.phone_number is 'Номер телефона пользователя';
 
-
 -- Таблица ролей
 create table if not exists roles(
     "id"		bigserial	    PRIMARY KEY,

@@ -35,7 +35,7 @@ public class UserRegistryServiceImpl implements UserRegistryService {
 
         Role defaultRole = roleService.getByName(DEFAULT_ROLE_NAME).orElseThrow(NullPointerException::new);
         user.addRole(defaultRole);
-        user = userService.add(encodePassword(user));
+        user = userService.create(encodePassword(user));
         log.info("IN registry -> successfully registration user: {}", user.getUsername());
         return user;
     }
