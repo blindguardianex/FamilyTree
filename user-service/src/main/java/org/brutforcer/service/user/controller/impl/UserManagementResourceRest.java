@@ -5,7 +5,6 @@ import org.brutforcer.service.user.controller.UserManagementResource;
 import org.brutforcer.service.user.dto.UserRegistryDto;
 import org.brutforcer.service.user.entity.User;
 import org.brutforcer.service.user.service.UserRegistryService;
-import org.brutforcer.service.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

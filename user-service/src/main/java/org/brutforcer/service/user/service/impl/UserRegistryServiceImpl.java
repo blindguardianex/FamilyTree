@@ -1,6 +1,8 @@
 package org.brutforcer.service.user.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.brutforcer.common.exceptions.EntityAlreadyExist;
+import org.brutforcer.service.user.entity.Address;
 import org.brutforcer.service.user.entity.Role;
 import org.brutforcer.service.user.entity.User;
 import org.brutforcer.service.user.service.AddressService;
@@ -30,8 +32,10 @@ public class UserRegistryServiceImpl implements UserRegistryService {
     }
 
     @Override
-    public User registry(User user) {
+    public User registry(User user){
         log.info("IN registry -> registration user: login {}, email {}, FIO: {} {} {}", user.getUsername(), user.getProfile().getEmail(), user.getProfile().getLastName(), user.getProfile().getFirstName(), user.getProfile().getOtherName());
+        var birthPlace = addressService.registry(user.getProfile().getBirthPlace());
+        user.getProfile().setBirthPlace(birthPlace);
 
         Role defaultRole = roleService.getByName(DEFAULT_ROLE_NAME).orElseThrow(NullPointerException::new);
         user.addRole(defaultRole);

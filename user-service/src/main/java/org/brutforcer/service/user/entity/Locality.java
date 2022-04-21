@@ -1,5 +1,6 @@
 package org.brutforcer.service.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.Getter;
@@ -33,6 +34,7 @@ public class Locality extends BaseEntity{
 
     @Schema(hidden = true)
     @NotNull
+    @JsonIgnore
     @ManyToOne(optional = false, targetEntity = Region.class)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;

@@ -42,7 +42,7 @@ public record UserRegistryDto(
         String otherName,
 
         @Schema(description = "Пол", example = "MALE")
-        @NotBlank(message = "Укажите пол")
+        @NotNull(message = "Укажите пол")
         Sex sex,
 
         @Schema(description = "Адрес электронной почты", example = "ferz@mail.ru")
@@ -50,8 +50,10 @@ public record UserRegistryDto(
         @Email(message = "Введите корректный адрес электронной почты")
         String email,
 
-        @Schema(description = "Телефонный номер", example = "8(800)555-35-35")
-        @Pattern(regexp = "^(\\+)?((\\d{2,3}) ?\\d|\\d)(([ -]?\\d)|( ?(\\d{2,3}) ?)){5,12}\\d$", message = "Введите корректный номер телефона")
+        @Schema(description = "Телефонный номер", example = "+7(800)555-3535")
+        @Pattern(regexp = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
+                                + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
+                                + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$", message = "Введите корректный номер телефона ")
         String phoneNumber,
 
         @Schema(description = "Дата рождения", example = "1994-11-11")

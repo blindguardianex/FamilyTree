@@ -23,13 +23,24 @@ public class JpaUserService implements UserService {
     }
 
     @Override
-    public User create(User user) throws EntityAlreadyExist {
+    public User create(User user){
         log.debug("IN create -> creating user: {}", user);
         var byUsername = getByUsername(user.getUsername());
         if (byUsername.isPresent()) {
             log.error("IN create -> was attempt creating user with username {}, but: already exist", user.getUsername());
             throw new EntityAlreadyExist("User with username " + user.getUsername() + " already exist");
         }
+        var byEmail = getByEmail(user.getProfile().getEmail());
+        if (byEmail.isPresent()) {
+            log.error("IN create -> was attempt creating user with email {}, but: already exist", user.getProfile().getEmail());
+            throw new EntityAlreadyExist("User with email " + user.getProfile().getEmail() + " already exist");
+        }
+        var byPhoneNumber = getByPhoneNumber(user.getProfile().getPhoneNumber());
+        if (byPhoneNumber.isPresent()) {
+            log.error("IN create -> was attempt creating user with phone number {}, but: already exist", user.getProfile().getPhoneNumber());
+            throw new EntityAlreadyExist("User with phone number " + user.getProfile().getPhoneNumber() + " already exist");
+        }
+
         var saved = repository.saveAndFlush(user);
         log.info("IN create -> User with username {} successfully created with id: {}", saved.getUsername(), saved.getId());
         return saved;
@@ -55,7 +66,7 @@ public class JpaUserService implements UserService {
         if (user.isPresent())
             log.info("IN getById -> loaded user with id: {}", id);
         else
-            log.error("IN getById -> user with id {} not found", id);
+            log.info("IN getById -> user with id {} not found", id);
         return user;
     }
 
@@ -66,7 +77,29 @@ public class JpaUserService implements UserService {
         if (user.isPresent())
             log.info("IN getByUsername -> loaded user with username: {}", username);
         else
-            log.error("IN getByUsername -> user with username {} not found", username);
+            log.info("IN getByUsername -> user with username {} not found", username);
+        return user;
+    }
+
+    @Override
+    public Optional<User> getByEmail(String email) {
+        log.debug("IN getByEmail -> loading user with email: {}", email);
+        var user = repository.getByProfileEmail(email);
+        if (user.isPresent())
+            log.info("IN getByEmail -> loaded user with email: {}", email);
+        else
+            log.info("IN getByEmail -> user with email {} not found", email);
+        return user;
+    }
+
+    @Override
+    public Optional<User> getByPhoneNumber(String phoneNumber) {
+        log.debug("IN getByPhoneNumber -> loading user with phoneNumber: {}", phoneNumber);
+        var user = repository.getByProfilePhoneNumber(phoneNumber);
+        if (user.isPresent())
+            log.info("IN getByPhoneNumber -> loaded user with phoneNumber: {}", phoneNumber);
+        else
+            log.info("IN getByPhoneNumber -> user with phoneNumber {} not found", phoneNumber);
         return user;
     }
 }
