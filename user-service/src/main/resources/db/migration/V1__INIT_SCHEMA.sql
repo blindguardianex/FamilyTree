@@ -9,6 +9,7 @@ create table if not exists users(
     first_name  varchar(255)    not null,
     last_name   varchar(255)    not null,
     other_name  varchar(255)    not null,
+    sex         varchar(15)     not null,
     email       varchar(255)    not null unique,
     phone_number    varchar(15) unique  unique
 );
@@ -22,9 +23,9 @@ comment on column users.password is 'Пароль пользователя';
 comment on column users.first_name is 'Имя пользователя';
 comment on column users.last_name is 'Фамилия пользователя';
 comment on column users.other_name is 'Отчество пользователя';
+comment on column users.sex is 'Пол пользователя';
 comment on column users.email is 'Адрес электронной почты пользователя';
 comment on column users.phone_number is 'Номер телефона пользователя';
-
 
 -- Таблица ролей
 create table if not exists roles(

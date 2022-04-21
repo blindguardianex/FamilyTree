@@ -3,6 +3,8 @@ package org.brutforcer.service.user.controller;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.brutforcer.common.exceptions.EntityAlreadyExist;
+import org.postgresql.util.PSQLException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,6 +42,28 @@ public class GlobalErrorHandler {
                 errorMap,
                 getErrorHttpHeaders(),
                 HttpStatus.BAD_REQUEST
+        );
+    }
+
+    @ExceptionHandler(EntityAlreadyExist.class)
+    public ResponseEntity<Map<String,String>> entityAlreadyExist(EntityAlreadyExist exception) {
+        return new ResponseEntity<>(
+                processException(
+                        MessageFormat.format("Сущность уже существует: {0}", exception.getMessage()),
+                        exception),
+                getErrorHttpHeaders(),
+                HttpStatus.CONFLICT
+        );
+    }
+
+    @ExceptionHandler(PSQLException.class)
+    public ResponseEntity<Map<String,String>> psqlException(PSQLException exception) {
+        return new ResponseEntity<>(
+                processException(
+                        MessageFormat.format("Ошибка добавления в БД: {0},\n{1}", exception.getMessage()),
+                        exception),
+                getErrorHttpHeaders(),
+                HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
 

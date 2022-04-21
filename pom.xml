@@ -15,6 +15,7 @@
         <module>swagger-module</module>
         <module>config-service</module>
         <module>discovery-service</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -25,9 +26,11 @@
         <spring-cloud-config.version>3.1.0</spring-cloud-config.version>
         <spring-cloud-discovery.version>3.1.0</spring-cloud-discovery.version>
         <spring-cloud-gateway.version>3.1.0</spring-cloud-gateway.version>
+        <spring-cloud-oauth2.version>2.2.5.RELEASE</spring-cloud-oauth2.version>
         <jackson.datatype.version>2.13.0</jackson.datatype.version>
         <flyway.version>8.3.0</flyway.version>
         <lombok.version>1.18.22</lombok.version>
+        <google.guava>31.0.1-jre</google.guava>
     </properties>
 
     <parent>

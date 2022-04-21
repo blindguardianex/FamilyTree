@@ -1,18 +1,15 @@
 package org.brutforcer.service.user.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.brutforcer.common.exceptions.NonExistEntity;
 import org.brutforcer.service.user.entity.Role;
-import org.brutforcer.service.user.enums.Status;
 import org.brutforcer.service.user.service.RoleService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,19 +24,66 @@ class JpaRoleServiceTest {
     private RoleService roleService;
 
     @Test
-    void add() {
-        var testRole = roleService.add(new Role().setName("TEST_ROLE"));
-        System.out.println(testRole);
+    void addAndDelete() {
+        var testRole = new Role().setName("TEST_ROLE");
+        var savedRole = roleService.add(testRole);
+        assertEquals(testRole, savedRole);
+        roleService.delete(savedRole);
+        var deletedRole = roleService.getById(savedRole.getId());
+        assertTrue(deletedRole.isEmpty());
     }
 
     @Test
     void getAll() {
         var all = roleService.getAll();
-        all.forEach(System.out::println);
+        all.forEach(role -> log.info("Founded role: {}", role.toString()));
     }
 
     @Test
     void getById() {
+        final long existingId = 1L;
+        final long notExistingId = 0L;
 
+        var role = roleService.getById(existingId);
+        assertTrue(role.isPresent());
+
+        role = roleService.getById(notExistingId);
+        assertTrue(role.isEmpty());
+    }
+
+    @Test
+    void update() {
+        assertThrows(NonExistEntity.class, ()->roleService.update(new Role()), "Was attempt updating role, but: role id is null");
+        final Role finalRole = new Role();
+        finalRole.setId(0L);
+        assertThrows(NonExistEntity.class, ()->roleService.update(finalRole),"Was attempt updating role, but: role with id " + finalRole.getId() + " not found");
+
+        final String existingName = "SYSTEM";
+
+        Role role = roleService.getByName(existingName).get();
+        assertEquals(existingName, role.getName());
+
+        final String newName = "SYSTEM_new";
+        role = roleService.update(role.setName(newName));
+        assertEquals(newName, role.getName());
+        role = roleService.getByName(newName).get();
+        assertEquals(newName, role.getName());
+
+        role = roleService.update(role.setName(existingName));
+        assertEquals(existingName, role.getName());
+        role = roleService.getByName(existingName).get();
+        assertEquals(existingName, role.getName());
+    }
+
+    @Test
+    void getByName() {
+        final String existingName = "SYSTEM";
+        final String notExistingName = "ABRA-KADABRA";
+
+        var role = roleService.getByName(existingName);
+        assertTrue(role.isPresent());
+
+        role = roleService.getByName(notExistingName);
+        assertTrue(role.isEmpty());
     }
 }

@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public interface AddressService {
 
-    Address add(Address address);
+    Address registry(Address address);
     Address update(Address address);
     Optional<Address> getById(long id);
+    Optional<Address> getByTextAddress(String address);
 }

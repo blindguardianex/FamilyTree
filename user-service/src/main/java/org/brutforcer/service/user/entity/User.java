@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.brutforcer.service.user.enums.Sex;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -33,6 +34,7 @@ public class User extends BaseEntity{
     private UserProfile profile;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
